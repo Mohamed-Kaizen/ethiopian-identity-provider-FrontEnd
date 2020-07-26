@@ -16,6 +16,12 @@
 <div class="h-screen w-full flex overflow-hidden select-none">
 	<LeftSideNavBar {segment} />
 
-	<slot />
+	<main
+		class="lg:my-1 lg:pt-2 lg:pb-2 lg:px-10 flex-1 bg-gray-200 dark:bg-black
+		rounded-l-lg transition duration-500 ease-in-out overflow-y-auto">
+
+		<slot />
+
+	</main>
 
 </div>

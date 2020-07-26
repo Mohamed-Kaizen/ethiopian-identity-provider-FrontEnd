@@ -11,7 +11,9 @@ if (typeof window !== "undefined") {
 
 	access_token.subscribe((value) => (access_tokens = value))
 	refresh_token.subscribe((value) => (refresh_tokens = value))
+	console.log(access_tokens)
 	if (access_tokens && refresh_tokens) {
+		console.log(access_tokens)
 		custom_axios.defaults.headers.common[
 			"Authorization"
 		] = `Bearer ${access_tokens}`

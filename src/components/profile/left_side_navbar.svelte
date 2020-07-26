@@ -15,7 +15,8 @@
 
 <nav
 	in:fly="{{x: -200, duration: 1000}}"
-	class="w-24 flex flex-col items-center bg-white dark:bg-gray-800 py-4">
+	class="hidden lg:flex w-24 flex-col items-center bg-white dark:bg-gray-800
+	py-4">
 
 	<div>
 		<!-- App Logo -->
