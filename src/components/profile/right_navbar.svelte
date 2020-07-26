@@ -118,14 +118,14 @@
 	{:else}
 		<button
 			class="mt-8 text-center py-4 px-3 text-white rounded-lg bg-red-400
-			shadow focus:outline-none capitalize">
+			shadow capitalize">
 			send renew request
 		</button>
 	{/if}
 
 	<button
 		class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
-		bg-green-400 shadow focus:outline-none capitalize">
+		bg-green-400 shadow capitalize">
 		<!-- Action -->
 
 		<svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
@@ -135,4 +135,19 @@
 		<span>start new bussiness</span>
 
 	</button>
+
+	<a
+		class="mt-8 "
+		href="https://ethiopia-identity-provider.herokuapp.com/o/applications/"
+		target="blank">
+
+		<button
+			class="w-full p-3 text-center text-white bg-blue-700 dark:bg-blue-500
+			-md font-normal rounded-lg capitalize shadow transition duration-500
+			ease-in-out ">
+			create your app
+		</button>
+
+	</a>
+
 </aside>
