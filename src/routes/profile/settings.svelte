@@ -64,7 +64,7 @@
 
 <div in:fly="{{y: 200, duration: 1000}}">
 
-	<div class="text-center mt-16">
+	<div class="text-center mt-10">
 
 		<div class="flex items-center justify-center">
 

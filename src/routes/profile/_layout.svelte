@@ -20,7 +20,7 @@
 	<LeftSideNavBar {segment} />
 
 	<main
-		class="lg:pt-2 lg:pb-2 lg:px-10 flex-1 bg-gray-200 dark:bg-black
+		class="lg:py-2 px-5 lg:px-10 flex-1 bg-gray-200 dark:bg-black
 		rounded-l-lg transition duration-500 ease-in-out overflow-y-auto">
 
 		<slot />
