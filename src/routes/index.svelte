@@ -1,8 +1,14 @@
 <script>
 	import {scale} from "svelte/transition"
+	import {goto} from "@sapper/app"
+
 	import Lazy from "svelte-lazy"
 
-	import {light_mode} from "../store"
+	import {light_mode, access_token, refresh_token} from "../store"
+
+	if ($access_token || $refresh_token) {
+		goto("profile/")
+	}
 </script>
 
 <svelte:head>

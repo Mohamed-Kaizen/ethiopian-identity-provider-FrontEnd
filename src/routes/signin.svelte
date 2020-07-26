@@ -1,6 +1,44 @@
 <script>
 	import {fly} from "svelte/transition"
+	import {goto} from "@sapper/app"
+
+	import {Textfield, Snackbar, Button} from "svelte-mui/src"
+	import custom_axios from "../axios.js"
+	import {access_token, refresh_token, user} from "../store"
+	import Spinner from "../components/spinner/circle.svelte"
+
+	if ($access_token || $refresh_token) {
+		goto("profile/")
+	}
+
+	let username,
+		password,
+		loading = false,
+		visible = false
+
+	async function sign_in() {
+		loading = true
+		const data = {username: username, password: password}
+		try {
+			const response = await custom_axios.post("users/login/", data)
+			access_token.set(response.data.access_token)
+			refresh_token.set(response.data.refresh_token)
+			user.set(response.data.user)
+			loading = false
+			goto("profile/")
+		} catch (e) {
+			visible = true
+			loading = false
+		}
+	}
 </script>
+
+<Snackbar bind:visible bg="#f44336" bottom>
+	Incorrect Username or Password
+	<span slot="action">
+		<Button color="#ff0" on:click="{() => (visible = false)}">Close</Button>
+	</span>
+</Snackbar>
 
 <div in:fly="{{x: 200, duration: 1000, delay: 1100}}">
 
@@ -32,6 +70,7 @@
 	<div class="flex justify-center my-2 mx-4 md:mx-0">
 
 		<form
+			on:submit|preventDefault="{sign_in}"
 			class="w-full max-w-xl bg-white dark:bg-gray-800 rounded-lg shadow-md
 			p-6">
 
@@ -53,6 +92,7 @@
 						border-gray-400 rounded-lg py-3 px-3 leading-tight
 						focus:outline-none"
 						type="text"
+						bind:value="{username}"
 						required />
 				</div>
 
@@ -72,6 +112,7 @@
 						border-gray-400 rounded-lg py-3 px-3 leading-tight
 						focus:outline-none"
 						type="password"
+						bind:value="{password}"
 						required />
 
 				</div>
@@ -79,11 +120,16 @@
 				<div class="w-full md:w-full px-3 mb-6">
 
 					<button
+						disabled="{!username || !password}"
 						type="submit"
 						class="appearance-none block w-full bg-blue-600
-						dark:bg-blue-700 text-gray-400 font-bold rounded-lg py-3
+						dark:bg-blue-700 text-white font-bold rounded-lg py-3
 						px-3 leading-tight hover:bg-blue-500 capitalize">
-						Sign in
+						{#if loading}
+							<div class="flex items-center justify-center">
+								<Spinner color="red" />
+							</div>
+						{:else}Sign in{/if}
 					</button>
 
 				</div>
