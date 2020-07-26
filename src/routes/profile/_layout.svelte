@@ -8,6 +8,8 @@
 	import RightNavBar from "../../components/profile/right_navbar.svelte"
 
 	if (typeof window !== "undefined") {
+		access_token.use_local_storage()
+		refresh_token.use_local_storage()
 		if (!$access_token || !$refresh_token) {
 			goto("signin/")
 		}

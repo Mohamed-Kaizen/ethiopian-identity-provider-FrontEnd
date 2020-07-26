@@ -1,6 +1,11 @@
 <script>
 	import {fly} from "svelte/transition"
-	import {user, light_mode} from "../../store.js"
+	import axios from "axios"
+	import moment from "moment"
+
+	import {user, light_mode, access_token} from "../../store.js"
+
+	let expired_date, expired_date_readable, is_vaild
 
 	function mode_swticher() {
 		if ($light_mode) {
@@ -11,6 +16,33 @@
 			light_mode.set(true)
 		}
 	}
+
+	async function get_data() {
+		try {
+			let config = {
+				headers: {Authorization: `Bearer ${$access_token}`},
+			}
+
+			const response = await axios.get(
+				"https://ethiopia-identity-provider.herokuapp.com/api/users/user/",
+				config
+			)
+
+			expired_date_readable = moment(
+				response.data.expired_at,
+				"YYYYMMDD"
+			).fromNow()
+
+			expired_date = moment(response.data.expired_at).format(
+				"MMMM Do YYYY"
+			)
+
+			is_vaild = moment(response.data.expired_at).isAfter(new Date())
+		} catch (e) {
+			console.log(e.response)
+		}
+	}
+	get_data()
 </script>
 
 <aside
@@ -78,8 +110,18 @@
 
 	</div>
 
-	<span class="mt-4 text-gray-600">Your Account will expire at</span>
-	<span class="mt-1 text-3xl font-semibold">2020/7/5</span>
+	{#if is_vaild}
+		<span class="mt-8 text-gray-600">Your Account will expire at</span>
+		<span class="mt-1 text-3xl font-semibold">
+			{expired_date} {expired_date_readable}
+		</span>
+	{:else}
+		<button
+			class="mt-8 text-center py-4 px-3 text-white rounded-lg bg-red-400
+			shadow focus:outline-none capitalize">
+			send renew request
+		</button>
+	{/if}
 
 	<button
 		class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
