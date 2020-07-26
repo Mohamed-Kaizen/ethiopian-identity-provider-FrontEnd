@@ -5,6 +5,7 @@
 
 	import {access_token, refresh_token, user, light_mode} from "../../store"
 	import LeftSideNavBar from "../../components/profile/left_side_navbar.svelte"
+	import RightNavBar from "../../components/profile/right_navbar.svelte"
 
 	if (typeof window !== "undefined") {
 		if (!$access_token || !$refresh_token) {
@@ -17,11 +18,14 @@
 	<LeftSideNavBar {segment} />
 
 	<main
-		class="lg:my-1 lg:pt-2 lg:pb-2 lg:px-10 flex-1 bg-gray-200 dark:bg-black
+		class="lg:pt-2 lg:pb-2 lg:px-10 flex-1 bg-gray-200 dark:bg-black
 		rounded-l-lg transition duration-500 ease-in-out overflow-y-auto">
 
 		<slot />
 
 	</main>
 
+	{#if segment === undefined}
+		<RightNavBar />
+	{/if}
 </div>
