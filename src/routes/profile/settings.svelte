@@ -2,7 +2,7 @@
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
 
-	import {Textfield, Snackbar, Button} from "svelte-mui/src"
+	import {Snackbar, Button} from "svelte-mui/src"
 	import axios from "axios"
 	import {access_token, refresh_token, user} from "../../store"
 	import Spinner from "../../components/spinner/circle.svelte"

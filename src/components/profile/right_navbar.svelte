@@ -2,10 +2,19 @@
 	import {fly} from "svelte/transition"
 	import axios from "axios"
 	import moment from "moment"
+	import {goto} from "@sapper/app"
 
-	import {user, light_mode, access_token} from "../../store.js"
+	import {Snackbar, Button} from "svelte-mui/src"
+	import {user, light_mode, access_token, refresh_token} from "../../store.js"
+	import Spinner from "../spinner/circle.svelte"
 
-	let expired_date, expired_date_readable, is_vaild
+	let expired_date,
+		expired_date_readable,
+		is_vaild,
+		message,
+		message_color,
+		loading = false,
+		visible = false
 
 	function mode_swticher() {
 		if ($light_mode) {
@@ -39,11 +48,46 @@
 
 			is_vaild = moment(response.data.expired_at).isAfter(new Date())
 		} catch (e) {
-			console.log(e.response)
+			access_token.set(false)
+			refresh_token.set(false)
+			user.set(false)
+			goto("signin/")
 		}
 	}
 	get_data()
+
+	async function renew() {
+		try {
+			loading = true
+			let config = {
+				headers: {Authorization: `Bearer ${$access_token}`},
+			}
+
+			const response = await axios.post(
+				"https://ethiopia-identity-provider.herokuapp.com/api/users/renew/",
+				{},
+				config
+			)
+
+			message = response.data.detail
+			message_color = "green"
+			visible = true
+			loading = false
+		} catch (e) {
+			message = e.response.data.detail
+			message_color = "#f44336"
+			visible = true
+			loading = false
+		}
+	}
 </script>
+
+<Snackbar bind:visible bg="{message_color}">
+	{message}
+	<span slot="action">
+		<Button color="blue" on:click="{() => (visible = false)}">Close</Button>
+	</span>
+</Snackbar>
 
 <aside
 	in:fly="{{x: 200, duration: 1000}}"
@@ -112,29 +156,25 @@
 
 	{#if is_vaild}
 		<span class="mt-8 text-gray-600">Your Account will expire at</span>
+
 		<span class="mt-1 text-3xl font-semibold">
 			{expired_date} {expired_date_readable}
 		</span>
 	{:else}
 		<button
+			on:click="{renew}"
 			class="mt-8 text-center py-4 px-3 text-white rounded-lg bg-red-400
 			shadow capitalize">
-			send renew request
+			{#if loading}
+				<div class="flex items-center justify-center">
+
+					<Spinner />
+
+				</div>
+			{:else}send renew request{/if}
+
 		</button>
 	{/if}
-
-	<button
-		class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
-		bg-green-400 shadow capitalize">
-		<!-- Action -->
-
-		<svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
-			<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-		</svg>
-
-		<span>start new bussiness</span>
-
-	</button>
 
 	<a
 		class="mt-8 "
@@ -149,5 +189,18 @@
 		</button>
 
 	</a>
+
+	<button
+		class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
+		bg-green-400 shadow capitalize">
+		<!-- Action -->
+
+		<svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
+			<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+		</svg>
+
+		<span>start new bussiness</span>
+
+	</button>
 
 </aside>
