@@ -100,7 +100,7 @@
 
 					<img
 						class="h-3/4 w-3/4"
-						src="empty.png/"
+						src="empty.svg/"
 						alt="empty awaited list" />
 
 				</div>

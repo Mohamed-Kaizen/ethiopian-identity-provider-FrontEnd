@@ -89,6 +89,25 @@
 
 		</li>
 
+		<li class="mt-5 p-3 hover:text-red-600 hover:bg-red-200 rounded-lg">
+
+			<a
+				href="https://ethiopia-identity-provider.herokuapp.com/o/authorized_tokens/"
+				target="blank">
+
+				<svg class="fill-current h-5 w-5" viewBox="0 0 24 24">
+					<path d="M0 0h24v24H0z" fill="none"></path>
+					<path
+						d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6
+						0h4v-4H4v4zm0-6h4v-4H4v4zm6
+						0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6
+						6h4v-4h-4v4zm0 6h4v-4h-4v4z"></path>
+				</svg>
+
+			</a>
+
+		</li>
+
 	</ul>
 
 	<div
