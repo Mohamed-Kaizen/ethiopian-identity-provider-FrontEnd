@@ -60,7 +60,7 @@
 				<button>
 
 					<svg
-						class="fill-current h-5 w-5 transform {$_('direction') === 'ltr' ? '' : '-rotate-90'}"
+						class="fill-current h-5 w-5 {$_('direction') === 'ltr' ? '' : 'transform -rotate-90'}"
 						viewBox="0 0 24 24"
 						stroke-width="2"
 						stroke-linecap="round"
