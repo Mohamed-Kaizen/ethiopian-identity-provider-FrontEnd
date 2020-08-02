@@ -1,0 +1,31 @@
+{
+	"title": {
+		"index": "Ethiopian Identity Administrator"
+	},
+	"top_navbar": {
+		"title": "Ethiopian Identity Administrator",
+		"sign_in": "sign in"
+	},
+	"sign_in": {
+		"title": "Sign in into your account",
+		"error": "Incorrect Username or Password",
+		"close": "Close",
+		"sign_in": "Sign in",
+		"username": "Username",
+		"password": "Password"
+	},
+	"home": {
+		"auth": "use an awesome authentication system for you apps",
+		"auth_sub": "Stop re-creating an authentication system over and over again. Use trusted system to identify your users.",
+		"action": "create your app",
+		"business": "create your own business with couple of clicks",
+		"business_sub": "No more waiting in line just to submit proposal. Become business owner with couple of clicks.",
+		"renew": "renew your identity without leaving your house.",
+		"renew_sub": "renew your expired identity from anywhere and anytime, no more wasting your day just to renew your identity."
+	},
+	"languages": {
+		"en": "English",
+		"ar": "Arabic"
+	},
+	"direction": "ltr"
+}

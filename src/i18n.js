@@ -8,7 +8,7 @@ import {
 import {setCookie, getCookie} from "./modules/cookie.js"
 
 const INIT_OPTIONS = {
-	fallbackLocale: "en",
+	fallbackLocale: "en-US",
 	initialLocale: null,
 	loadingDelay: 200,
 	formats: {},
@@ -17,7 +17,7 @@ const INIT_OPTIONS = {
 
 let currentLocale = null
 
-register("en", () => import("../local/en.json"))
+register("en-US", () => import("../local/en-US.json"))
 register("ar", () => import("../local/ar.json"))
 
 $locale.subscribe((value) => {
