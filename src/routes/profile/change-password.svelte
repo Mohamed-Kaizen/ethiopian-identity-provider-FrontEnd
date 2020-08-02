@@ -1,6 +1,7 @@
 <script>
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
+	import {_} from "svelte-i18n"
 
 	import {Snackbar, Button} from "svelte-mui/src"
 	import axios from "axios"
@@ -55,12 +56,22 @@
 	}
 </script>
 
-<Snackbar bind:visible bg="{message_color}" bottom>
+<Snackbar
+	style="direction: {$_('direction')}"
+	bind:visible
+	bg="{message_color}"
+	bottom>
 	{message}
-	<span slot="action">
-		<Button color="blue" on:click="{() => (visible = false)}">Close</Button>
+	<span class="{$_('direction') === 'ltr' ? '' : 'mr-4'}" slot="action">
+		<Button color="blue" on:click="{() => (visible = false)}">
+			{$_('sign_in.close')}
+		</Button>
 	</span>
 </Snackbar>
+
+<svelte:head>
+	<title>{$_('profile.change_password_title')} | {$_('title.index')}</title>
+</svelte:head>
 
 <div in:fly="{{y: 200, duration: 1000}}">
 
@@ -84,7 +95,7 @@
 		</div>
 
 		<h2 class="text-4xl tracking-tight dark:text-gray-400">
-			Change your password
+			{$_('profile.change_password_title')}
 		</h2>
 
 	</div>
@@ -104,7 +115,7 @@
 						class="block uppercase tracking-wide text-gray-700
 						dark:text-gray-400 text-xs font-bold mb-2"
 						for="old_password">
-						old password
+						{$_('profile.old_password')}
 					</label>
 
 					<input
@@ -124,7 +135,7 @@
 						class="block uppercase tracking-wide text-gray-700
 						dark:text-gray-400 text-xs font-bold mb-2"
 						for="new_password1">
-						new password
+						{$_('profile.new_password')}
 					</label>
 
 					<input
@@ -145,7 +156,7 @@
 						class="block uppercase tracking-wide text-gray-700
 						dark:text-gray-400 text-xs font-bold mb-2"
 						for="new_password2">
-						confirm new password
+						{$_('profile.confirm_new_password')}
 					</label>
 
 					<input
@@ -173,7 +184,7 @@
 							<div class="flex items-center justify-center">
 								<Spinner />
 							</div>
-						{:else}Submit{/if}
+						{:else}{$_('profile.submit')}{/if}
 
 					</button>
 

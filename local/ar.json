@@ -28,10 +28,18 @@
 		"ar": "العربية"
 	},
 	"profile": {
+		"index": "الملف الشخصي",
+		"hello": "مرحبا،",
+		"businesses": "الأعمال",
 		"right_navbar_expire": "سينتهي حسابك في",
 		"right_navbar_renew": "إرسال طلب تجديد",
 		"right_navbar_app": "إنشاء تطبيقك",
-		"right_navbar_business": "بدء عمل جديد"
+		"right_navbar_business": "بدء عمل جديد",
+		"change_password_title": "غير كلمة المرور الخاصة بك",
+		"old_password": "كلمة المرور القديمة",
+		"new_password": "كلمة سر جديدة",
+		"confirm_new_password": "تأكيد كلمة المرور الجديدة",
+		"submit": "إرسال"
 	},
 
 	"direction": "rtl"
