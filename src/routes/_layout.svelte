@@ -1,3 +1,10 @@
+<script context="module">
+	import {isLoading, waitLocale} from "svelte-i18n"
+	export async function preload(page) {
+		return waitLocale()
+	}
+</script>
+
 <script>
 	export let segment
 
@@ -25,7 +32,7 @@
 	}
 </script>
 
-{#if $preloading}
+{#if $preloading || $isLoading}
 	<PreloadingIndicator />
 {/if}
 

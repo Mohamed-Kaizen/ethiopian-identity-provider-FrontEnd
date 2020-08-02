@@ -1,6 +1,8 @@
 <script>
 	export let light_mode
 
+	import {_, locale} from "svelte-i18n"
+
 	function mode_swticher() {
 		if ($light_mode) {
 			document.documentElement.classList.add("mode-dark")
@@ -10,18 +12,23 @@
 			light_mode.set(true)
 		}
 	}
+
+	function handleLocaleChange(event) {
+		locale.set(event.target.value)
+	}
 </script>
 
 <nav
-	class="w-full h-16 p-4 flex items-center justify-between lg:justify-between
-	bg-white text-gray-600 dark:text-gray-400 dark:bg-gray-800 shadow transition
-	duration-500 ease-in-out">
+	class="w-full h-16 p-4 flex {$_('direction') === 'ltr' ? '' : 'flex-row-reverse'}
+	items-center justify-between lg:justify-between bg-white text-gray-600
+	dark:text-gray-400 dark:bg-gray-800 shadow transition duration-500
+	ease-in-out">
 
 	<ul class="flex items-center">
 		<!-- to bar left  -->
 
 		<li
-			class="mr-2 hover:text-blue-500 cursor-pointer transition
+			class="mt-1 mr-2 hover:text-blue-500 cursor-pointer transition
 			duration-700 ease-in-out "
 			on:click="{mode_swticher}">
 
@@ -64,11 +71,25 @@
 				</button>
 			{/if}
 		</li>
+
+		<li class="hidden md:block">
+			<select
+				class="px-2 py-1 ml-2 bg-gray-300 dark:bg-gray-600 rounded-full"
+				bind:value="{$locale}"
+				on:blur="{handleLocaleChange}">
+				<option value="en-US">{$_('languages.en')}</option>
+				<option value="ar">{$_('languages.ar')}</option>
+			</select>
+		</li>
+
 	</ul>
 
-	<ul class="pl-10 lg:pl-0">
+	<ul class="pl-10 md:pl-0">
 
-		<a class="flex items-center hover:text-blue-600" href="/">
+		<a
+			class="flex {$_('direction') === 'ltr' ? 'items-center' : ''}
+			hover:text-blue-600"
+			href="/">
 
 			<svg class="h-8 w-8 fill-current lg:mr-2" viewBox="0 0 480 512">
 				<path
@@ -90,9 +111,7 @@
 					36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path>
 			</svg>
 
-			<span class="hidden lg:block text-lg">
-				Ethiopian Identity Administrator
-			</span>
+			<span class="hidden lg:block text-lg">{$_('top_navbar.title')}</span>
 
 		</a>
 
@@ -105,7 +124,7 @@
 			class="py-2 px-4 rounded-full focus:outline-none focus:shadow-outline
 			hover:bg-blue-600 hover:text-white font-normal transition
 			duration-500 ease-in-out capitalize">
-			sign in
+			{$_('top_navbar.sign_in')}
 		</button>
 
 	</a>
