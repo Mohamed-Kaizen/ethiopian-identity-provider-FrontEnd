@@ -2,7 +2,9 @@
 	import {fly} from "svelte/transition"
 	import axios from "axios"
 	import moment from "moment"
+	import locales from "moment/min/locales.min"
 	import {goto} from "@sapper/app"
+	import {_, locale} from "svelte-i18n"
 
 	import {Snackbar, Button} from "svelte-mui/src"
 	import {user, light_mode, access_token, refresh_token} from "../../store.js"
@@ -26,6 +28,10 @@
 		}
 	}
 
+	function handleLocaleChange(event) {
+		locale.set(event.target.value)
+	}
+
 	async function get_data() {
 		try {
 			let config = {
@@ -36,7 +42,7 @@
 				"https://ethiopia-identity-provider.herokuapp.com/api/users/user/",
 				config
 			)
-
+			moment.locale($locale)
 			expired_date_readable = moment(
 				response.data.expired_at,
 				"YYYYMMDD"
@@ -82,15 +88,18 @@
 	}
 </script>
 
-<Snackbar bind:visible bg="{message_color}">
+<Snackbar style="direction: {$_('direction')}" bind:visible bg="{message_color}">
 	{message}
-	<span slot="action">
-		<Button color="blue" on:click="{() => (visible = false)}">Close</Button>
+	<span class="{$_('direction') === 'ltr' ? '' : 'mr-4'}" slot="action">
+		<Button color="blue" on:click="{() => (visible = false)}">
+			{$_('sign_in.close')}
+		</Button>
 	</span>
 </Snackbar>
 
 <aside
-	in:fly="{{x: 200, duration: 1000}}"
+	style="direction: {$_('direction')}"
+	in:fly="{{x: $_('direction') === 'ltr' ? 200 : -200, duration: 1000}}"
 	class="w-1/4 px-6 py-4 hidden lg:flex flex-col bg-gray-200 dark:bg-gray-800
 	dark:text-gray-400">
 
@@ -142,6 +151,19 @@
 			{/if}
 		</div>
 
+		<select
+			class="{$_('direction') === 'ltr' ? 'px-2 py-1' : 'pr-8 pb-2 pt-1'}
+			bg-gray-300 dark:bg-gray-600 rounded-full"
+			bind:value="{$locale}"
+			on:blur="{handleLocaleChange}">
+			<!-- Middel side -->
+
+			<option value="ar">{$_('languages.ar')}</option>
+
+			<option value="en-US">{$_('languages.en')}</option>
+
+		</select>
+
 		<div class="flex items-center">
 			<!-- Right side -->
 
@@ -155,7 +177,9 @@
 	</div>
 
 	{#if is_vaild}
-		<span class="mt-8 text-gray-600">Your Account will expire at</span>
+		<span class="mt-8 text-gray-600 dark:text-gray-500">
+			{$_('profile.right_navbar_expire')}
+		</span>
 
 		<span class="mt-1 text-3xl font-semibold">
 			{expired_date} {expired_date_readable}
@@ -163,7 +187,7 @@
 	{:else}
 		<button
 			on:click="{renew}"
-			class="mt-8 text-center py-4 px-3 text-white rounded-lg bg-red-400
+			class="mt-20 py-4 px-3 text-white text-center rounded-lg bg-red-400
 			shadow capitalize">
 			{#if loading}
 				<div class="flex items-center justify-center">
@@ -171,36 +195,25 @@
 					<Spinner />
 
 				</div>
-			{:else}send renew request{/if}
+			{:else}{$_('profile.right_navbar_renew')}{/if}
 
 		</button>
 	{/if}
 
 	<a
-		class="mt-8 "
+		class="mt-12 w-full p-3 text-white text-center bg-blue-700
+		dark:bg-blue-500 font-normal rounded-lg capitalize shadow transition
+		duration-500 ease-in-out"
 		href="https://ethiopia-identity-provider.herokuapp.com/o/applications/"
 		target="blank">
-
-		<button
-			class="w-full p-3 text-center text-white bg-blue-700 dark:bg-blue-500
-			-md font-normal rounded-lg capitalize shadow transition duration-500
-			ease-in-out ">
-			create your app
-		</button>
-
+		{$_('profile.right_navbar_app')}
 	</a>
 
-	<button
-		class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
-		bg-green-400 shadow capitalize">
-		<!-- Action -->
-
-		<svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
-			<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-		</svg>
-
-		<span>start new bussiness</span>
-
-	</button>
+	<a
+		href="profile/new-bussiness/"
+		class="mt-12 w-full p-3 text-white text-center rounded-lg bg-green-400
+		capitalize shadow transition duration-500 ease-in-out">
+		{$_('profile.right_navbar_business')}
+	</a>
 
 </aside>

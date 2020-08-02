@@ -2,6 +2,7 @@
 	export let segment
 	import {goto} from "@sapper/app"
 	import {fly} from "svelte/transition"
+	import {_, locale} from "svelte-i18n"
 
 	import {access_token, refresh_token, user} from "../../store"
 
@@ -14,7 +15,7 @@
 </script>
 
 <nav
-	in:fly="{{x: -200, duration: 1000}}"
+	in:fly="{{x: $_('direction') === 'ltr' ? -200 : 200, duration: 1000}}"
 	class="hidden lg:flex w-24 flex-col items-center bg-white dark:bg-gray-800
 	py-4">
 

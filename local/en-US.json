@@ -27,5 +27,11 @@
 		"en": "English",
 		"ar": "Arabic"
 	},
+	"profile": {
+		"right_navbar_expire": "Your Account will expire at",
+		"right_navbar_renew": "send renew request",
+		"right_navbar_app": "create your app",
+		"right_navbar_business": "start new business"
+	},
 	"direction": "ltr"
 }

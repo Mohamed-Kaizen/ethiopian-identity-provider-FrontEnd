@@ -27,5 +27,12 @@
 		"en": "الإنجليزية",
 		"ar": "العربية"
 	},
+	"profile": {
+		"right_navbar_expire": "سينتهي حسابك في",
+		"right_navbar_renew": "إرسال طلب تجديد",
+		"right_navbar_app": "إنشاء تطبيقك",
+		"right_navbar_business": "بدء عمل جديد"
+	},
+
 	"direction": "rtl"
 }

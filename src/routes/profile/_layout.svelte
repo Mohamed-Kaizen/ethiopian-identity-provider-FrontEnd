@@ -9,6 +9,7 @@
 	export let segment
 
 	import {goto} from "@sapper/app"
+	import {_} from "svelte-i18n"
 
 	import {access_token, refresh_token, user, light_mode} from "../../store"
 	import LeftSideNavBar from "../../components/profile/left_side_navbar.svelte"
@@ -23,7 +24,9 @@
 	}
 </script>
 
-<div class="h-screen w-full flex overflow-hidden select-none">
+<div
+	style="direction: {$_('direction')}"
+	class="h-screen w-full flex overflow-hidden select-none">
 	<LeftSideNavBar {segment} />
 
 	<main
