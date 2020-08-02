@@ -2,6 +2,7 @@
 	import {fly} from "svelte/transition"
 	import axios from "axios"
 	import moment from "moment"
+	import {_} from "svelte-i18n"
 
 	import {access_token} from "../../store.js"
 
@@ -34,9 +35,10 @@
 		class="flex items-center pt-1 pb-1 px-8 text-lg font-semibold capitalize">
 		<!-- Header -->
 
-		<span>Awaited</span>
+		<span>{$_('profile.accepted_awaited')}</span>
 
 	</h3>
+
 	<div>
 		<!-- List -->
 
@@ -59,7 +61,7 @@
 							<div class="flex items-center">
 
 								<svg
-									class="h-5 w-5 fill-current mr-1
+									class="h-5 w-5 fill-current {$_('direction') === 'ltr' ? 'mr-1' : 'ml-1'}
 									text-gray-600"
 									viewBox="0 0 24 24">
 									<path

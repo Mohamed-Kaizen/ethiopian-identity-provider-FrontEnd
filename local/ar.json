@@ -39,7 +39,9 @@
 		"old_password": "كلمة المرور القديمة",
 		"new_password": "كلمة سر جديدة",
 		"confirm_new_password": "تأكيد كلمة المرور الجديدة",
-		"submit": "إرسال"
+		"submit": "إرسال",
+		"accepted_list": "قبلت",
+		"accepted_awaited": "منتظر"
 	},
 
 	"direction": "rtl"

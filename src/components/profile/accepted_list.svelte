@@ -2,6 +2,7 @@
 	import {fly} from "svelte/transition"
 	import axios from "axios"
 	import moment from "moment"
+	import {_} from "svelte-i18n"
 
 	import {access_token} from "../../store.js"
 
@@ -27,8 +28,9 @@
 
 <div
 	in:fly="{{y: 200, duration: 1000}}"
-	class="h-106 w-full lg:w-1/2 mt-8 mr-6 py-2 flex-shrink-0 flex flex-col
-	bg-white dark:bg-gray-600 rounded-lg overflow-y-auto">
+	class="h-106 w-full lg:w-1/2 mt-8 {$_('direction') === 'ltr' ? 'mr-6' : 'mr-0'}
+	py-2 flex-shrink-0 flex flex-col bg-white dark:bg-gray-600 rounded-lg
+	overflow-y-auto">
 	<!-- Card list container -->
 
 	<h3
@@ -36,7 +38,7 @@
 		dark:text-gray-300">
 		<!-- Header -->
 
-		<span>accepted</span>
+		<span>{$_('profile.accepted_list')}</span>
 
 	</h3>
 
@@ -62,7 +64,7 @@
 							<div class="flex items-center">
 
 								<svg
-									class="h-5 w-5 fill-current mr-1
+									class="h-5 w-5 fill-current {$_('direction') === 'ltr' ? 'mr-1' : 'ml-1'}
 									text-gray-600"
 									viewBox="0 0 24 24">
 									<path

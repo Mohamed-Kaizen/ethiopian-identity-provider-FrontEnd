@@ -39,7 +39,9 @@
 		"old_password": "old password",
 		"new_password": "new password",
 		"confirm_new_password": "confirm new password",
-		"submit": "Submit"
+		"submit": "Submit",
+		"accepted_list": "accepted",
+		"accepted_awaited": "awaited"
 	},
 	"direction": "ltr"
 }
