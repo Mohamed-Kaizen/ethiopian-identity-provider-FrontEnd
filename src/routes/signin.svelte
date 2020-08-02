@@ -34,6 +34,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{$_('sign_in.sign_in')} | {$_('title.index')}</title>
+</svelte:head>
+
 <Snackbar style="direction: {$_('direction')}" bind:visible bg="#f44336" bottom>
 	{$_('sign_in.error')}
 	<span class="{$_('direction') === 'ltr' ? '' : 'mr-4'}" slot="action">
@@ -47,15 +51,15 @@
 	style="direction: {$_('direction')}"
 	in:fly="{{x: $_('direction') === 'ltr' ? 200 : -200, duration: 1000, delay: 1100}}">
 
-	<div class="text-center mt-16">
+	<div class="text-center mt-8">
 
-		<h2 class="text-4xl tracking-tight dark:text-gray-400">
+		<h2 class="text-2xl md:text-4xl tracking-tight dark:text-gray-400">
 			{$_('sign_in.title')}
 		</h2>
 
 	</div>
 
-	<div class="flex justify-center my-2 mx-4 md:mx-0">
+	<div class="flex justify-center mt-8 lg:mt-16 mx-4 md:mx-0">
 
 		<form
 			on:submit|preventDefault="{sign_in}"
@@ -105,14 +109,14 @@
 
 				</div>
 
-				<div class="w-full md:w-full px-3 mb-6">
+				<div class="w-full px-3 mb-6">
 
 					<button
 						disabled="{!username || !password}"
 						type="submit"
-						class="appearance-none block w-full bg-blue-600
-						dark:bg-blue-700 text-white font-bold rounded-lg py-3
-						px-3 leading-tight hover:bg-blue-500 capitalize">
+						class="block w-full bg-blue-600 dark:bg-blue-700
+						text-white font-bold rounded-lg py-3 px-3 leading-tight
+						hover:bg-blue-500 shadow-md capitalize">
 						{#if loading}
 							<div class="flex items-center justify-center">
 								<Spinner />

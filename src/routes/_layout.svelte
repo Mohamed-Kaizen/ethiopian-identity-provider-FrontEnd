@@ -14,6 +14,7 @@
 
 	import PreloadingIndicator from "../components/PreloadingIndicator.svelte"
 	import TopNavBar from "../components/top_navbar.svelte"
+	import BottomNavBar from "../components/bottom_navbar.svelte"
 
 	const {preloading} = stores()
 
@@ -40,6 +41,7 @@
 	<TopNavBar {light_mode} />
 
 	<slot />
+	<BottomNavBar />
 {:else}
 	<slot />
 {/if}

@@ -25,7 +25,7 @@
 	duration-500 ease-in-out">
 
 	<ul class="flex items-center">
-		<!-- to bar left  -->
+		<!-- left section  -->
 
 		<li
 			class="mt-1 {$_('direction') === 'ltr' ? 'mr-2' : 'ml-2'}
@@ -92,14 +92,15 @@
 	</ul>
 
 	<ul class="pl-10 md:pl-0">
+		<!-- left section  -->
 
 		<a
-			class="flex {$_('direction') === 'ltr' ? 'items-center' : ''}
+			class="flex {$_('direction') === 'ltr' ? 'mr-4 items-center' : 'mr-24 md:mr-0'}
 			hover:text-blue-600"
 			href="/">
 
 			<svg
-				class="h-8 w-8 fill-current {$_('direction') === 'ltr' ? 'lg:mr-2' : 'lg:ml-2'}"
+				class="h-8 w-8 fill-current {$_('direction') === 'ltr' ? 'mr-0 md:mr-2' : 'ml-0 md:ml-2'}"
 				viewBox="0 0 480 512">
 				<path
 					fill="currentColor"
@@ -120,19 +121,20 @@
 					36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path>
 			</svg>
 
-			<span class="hidden lg:block text-lg">{$_('top_navbar.title')}</span>
+			<span class="hidden md:block text-lg">{$_('top_navbar.title')}</span>
 
 		</a>
 
 	</ul>
 
-	<a href="signin/" class="focus:outline-none focus:text-red-600">
+	<a href="signin/" class="-ml-2 focus:outline-none focus:text-red-600">
+		<!-- right section  -->
 
 		<button
 			type="button"
-			class="py-2 px-4 rounded-full focus:outline-none focus:shadow-outline
-			hover:bg-blue-600 hover:text-white font-normal transition
-			duration-500 ease-in-out capitalize">
+			class="py-1 px-2 rounded-full focus:outline-none focus:shadow-outline
+			hover:bg-blue-600 hover:text-white text-xs md:text-base font-normal
+			transition duration-500 ease-in-out capitalize">
 			{$_('top_navbar.sign_in')}
 		</button>
 
