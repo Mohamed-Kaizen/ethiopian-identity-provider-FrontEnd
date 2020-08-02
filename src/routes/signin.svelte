@@ -1,6 +1,7 @@
 <script>
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
+	import {_} from "svelte-i18n"
 
 	import {Textfield, Snackbar, Button} from "svelte-mui/src"
 	import custom_axios from "../axios.js"
@@ -33,36 +34,23 @@
 	}
 </script>
 
-<Snackbar bind:visible bg="#f44336" bottom>
-	Incorrect Username or Password
-	<span slot="action">
-		<Button color="#ff0" on:click="{() => (visible = false)}">Close</Button>
+<Snackbar style="direction: {$_('direction')}" bind:visible bg="#f44336" bottom>
+	{$_('sign_in.error')}
+	<span class="{$_('direction') === 'ltr' ? '' : 'mr-4'}" slot="action">
+		<Button color="blue" on:click="{() => (visible = false)}">
+			{$_('sign_in.close')}
+		</Button>
 	</span>
 </Snackbar>
 
-<div in:fly="{{x: 200, duration: 1000, delay: 1100}}">
+<div
+	style="direction: {$_('direction')}"
+	in:fly="{{x: $_('direction') === 'ltr' ? 200 : -200, duration: 1000, delay: 1100}}">
 
 	<div class="text-center mt-16">
 
-		<div class="flex items-center justify-center">
-
-			<svg
-				fill="none"
-				viewBox="0 0 24 24"
-				class="w-12 h-12 text-blue-500 dark:text-blue-400"
-				stroke="currentColor">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2
-					2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-			</svg>
-
-		</div>
-
 		<h2 class="text-4xl tracking-tight dark:text-gray-400">
-			Sign in into your account
+			{$_('sign_in.title')}
 		</h2>
 
 	</div>
@@ -76,41 +64,41 @@
 
 			<div class="flex flex-wrap -mx-3 mb-0">
 
-				<div class="w-full md:w-full px-3 mb-6">
+				<div class="w-full md:w-full flex flex-col px-3 mb-6">
 
 					<label
 						class="block uppercase tracking-wide text-gray-700
 						dark:text-gray-400 text-xs font-bold mb-2"
 						for="username">
-						username
+						{$_('sign_in.username')}
 					</label>
 
 					<input
 						id="username"
-						class="appearance-none block w-full bg-white
-						dark:bg-gray-400 text-gray-900 font-medium border
-						border-gray-400 rounded-lg py-3 px-3 leading-tight
-						focus:outline-none"
+						class="block w-full bg-white dark:bg-gray-400
+						text-gray-900 font-medium border border-gray-400
+						rounded-lg py-3 px-3 leading-tight focus:outline-none
+						shadow"
 						type="text"
 						bind:value="{username}"
 						required />
 				</div>
 
-				<div class="w-full md:w-full px-3 mb-6">
+				<div class="w-full md:w-full flex flex-col px-3 mb-6">
 
 					<label
 						class="block uppercase tracking-wide text-gray-700
 						dark:text-gray-400 text-xs font-bold mb-2"
 						for="password">
-						password
+						{$_('sign_in.password')}
 					</label>
 
 					<input
 						id="password"
-						class="appearance-none block w-full bg-white
-						dark:bg-gray-400 text-gray-900 font-medium border
-						border-gray-400 rounded-lg py-3 px-3 leading-tight
-						focus:outline-none"
+						class="block w-full bg-white dark:bg-gray-400
+						text-gray-900 font-medium border border-gray-400
+						rounded-lg py-3 px-3 leading-tight focus:outline-none
+						shadow"
 						type="password"
 						bind:value="{password}"
 						required />
@@ -127,9 +115,9 @@
 						px-3 leading-tight hover:bg-blue-500 capitalize">
 						{#if loading}
 							<div class="flex items-center justify-center">
-								<Spinner color="red" />
+								<Spinner />
 							</div>
-						{:else}Sign in{/if}
+						{:else}{$_('sign_in.sign_in')}{/if}
 					</button>
 
 				</div>
@@ -139,4 +127,5 @@
 		</form>
 
 	</div>
+
 </div>

@@ -19,24 +19,25 @@
 </script>
 
 <nav
-	class="w-full h-16 p-4 flex {$_('direction') === 'ltr' ? '' : 'flex-row-reverse'}
-	items-center justify-between lg:justify-between bg-white text-gray-600
-	dark:text-gray-400 dark:bg-gray-800 shadow transition duration-500
-	ease-in-out">
+	style="direction: {$_('direction')}"
+	class="w-full h-16 p-4 flex items-center justify-between lg:justify-between
+	bg-white text-gray-600 dark:text-gray-400 dark:bg-gray-800 shadow transition
+	duration-500 ease-in-out">
 
 	<ul class="flex items-center">
 		<!-- to bar left  -->
 
 		<li
-			class="mt-1 mr-2 hover:text-blue-500 cursor-pointer transition
-			duration-700 ease-in-out "
+			class="mt-1 {$_('direction') === 'ltr' ? 'mr-2' : 'ml-2'}
+			hover:text-blue-500 cursor-pointer transition duration-700
+			ease-in-out"
 			on:click="{mode_swticher}">
 
 			{#if !$light_mode}
 				<button>
 
 					<svg
-						class="fill-current h-5 w-5"
+						class="h-5 w-5 fill-current"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 						stroke-width="2"
@@ -59,7 +60,7 @@
 				<button>
 
 					<svg
-						class="fill-current h-5 w-5"
+						class="fill-current h-5 w-5 transform {$_('direction') === 'ltr' ? '' : '-rotate-90'}"
 						viewBox="0 0 24 24"
 						stroke-width="2"
 						stroke-linecap="round"
@@ -73,13 +74,19 @@
 		</li>
 
 		<li class="hidden md:block">
+
 			<select
-				class="px-2 py-1 ml-2 bg-gray-300 dark:bg-gray-600 rounded-full"
+				class="{$_('direction') === 'ltr' ? 'px-2 py-1 ml-2' : 'mr-2 pr-8 pb-2 pt-1'}
+				bg-gray-300 dark:bg-gray-600 rounded-full"
 				bind:value="{$locale}"
 				on:blur="{handleLocaleChange}">
-				<option value="en-US">{$_('languages.en')}</option>
+
 				<option value="ar">{$_('languages.ar')}</option>
+
+				<option value="en-US">{$_('languages.en')}</option>
+
 			</select>
+
 		</li>
 
 	</ul>
@@ -91,7 +98,9 @@
 			hover:text-blue-600"
 			href="/">
 
-			<svg class="h-8 w-8 fill-current lg:mr-2" viewBox="0 0 480 512">
+			<svg
+				class="h-8 w-8 fill-current {$_('direction') === 'ltr' ? 'lg:mr-2' : 'lg:ml-2'}"
+				viewBox="0 0 480 512">
 				<path
 					fill="currentColor"
 					d="M186.1 328.7c0 20.9-10.9 55.1-36.7
