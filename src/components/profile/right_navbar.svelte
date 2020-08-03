@@ -209,11 +209,4 @@
 		{$_('profile.right_navbar_app')}
 	</a>
 
-	<a
-		href="profile/new-bussiness/"
-		class="mt-12 w-full p-3 text-white text-center rounded-lg bg-green-400
-		capitalize shadow transition duration-500 ease-in-out">
-		{$_('profile.right_navbar_business')}
-	</a>
-
 </aside>
