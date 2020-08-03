@@ -41,7 +41,17 @@
 		"confirm_new_password": "تأكيد كلمة المرور الجديدة",
 		"submit": "إرسال",
 		"accepted_list": "قبلت",
-		"accepted_awaited": "منتظر"
+		"accepted_awaited": "منتظر",
+		"business_name": "الاسم التجاري",
+		"business_description": "وصف العمل",
+		"business_city": "مدينة",
+		"business_sub_city": "المدينة الفرعية",
+		"business_type": "نوع العمل",
+		"business_type_solo": "ملكية فردية",
+		"business_type_private": "شركة خاصة محدودة",
+		"business_owners": "أصحاب الأعمال",
+		"business_owners_users": "المستخدمون",
+		"business_owners_selected_user": "المستخدمون المحددون"
 	},
 
 	"direction": "rtl"

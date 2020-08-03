@@ -41,7 +41,17 @@
 		"confirm_new_password": "confirm new password",
 		"submit": "Submit",
 		"accepted_list": "accepted",
-		"accepted_awaited": "awaited"
+		"accepted_awaited": "awaited",
+		"business_name": "business name",
+		"business_description": "business description",
+		"business_city": "city",
+		"business_sub_city": "sub city",
+		"business_type_solo": "Sole Proprietorship",
+		"business_type_private": "Private Limited Company",
+		"business_type": "business type",
+		"business_owners": "business owners",
+		"business_owners_users": "Users",
+		"business_owners_selected_user": "Selected Users"
 	},
 	"direction": "ltr"
 }

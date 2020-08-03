@@ -79,10 +79,9 @@
 
 					<input
 						id="username"
-						class="block w-full bg-white dark:bg-gray-400
-						text-gray-900 font-medium border border-gray-400
-						rounded-lg py-3 px-3 leading-tight focus:outline-none
-						shadow"
+						class="w-full bg-gray-200 dark:bg-gray-400 text-gray-900
+						font-medium border border-gray-400 rounded-lg py-3 px-3
+						leading-tight focus:outline-none shadow"
 						type="text"
 						bind:value="{username}"
 						required />
@@ -99,10 +98,9 @@
 
 					<input
 						id="password"
-						class="block w-full bg-white dark:bg-gray-400
-						text-gray-900 font-medium border border-gray-400
-						rounded-lg py-3 px-3 leading-tight focus:outline-none
-						shadow"
+						class="w-full bg-gray-200 dark:bg-gray-400 text-gray-900
+						font-medium border border-gray-400 rounded-lg py-3 px-3
+						leading-tight focus:outline-none shadow"
 						type="password"
 						bind:value="{password}"
 						required />

@@ -120,10 +120,9 @@
 
 					<input
 						id="old_password"
-						class="appearance-none block w-full bg-white
-						dark:bg-gray-400 text-gray-900 font-medium border
-						border-gray-400 rounded-lg py-3 px-3 leading-tight
-						focus:outline-none"
+						class="w-full bg-gray-200 dark:bg-gray-400 text-gray-900
+						font-medium border border-gray-400 rounded-lg py-3 px-3
+						leading-tight focus:outline-none shadow"
 						type="password"
 						bind:value="{old_password}"
 						required />
@@ -140,10 +139,9 @@
 
 					<input
 						id="new_password1"
-						class="appearance-none block w-full bg-white
-						dark:bg-gray-400 text-gray-900 font-medium border
-						border-gray-400 rounded-lg py-3 px-3 leading-tight
-						focus:outline-none"
+						class="w-full bg-gray-200 dark:bg-gray-400 text-gray-900
+						font-medium border border-gray-400 rounded-lg py-3 px-3
+						leading-tight focus:outline-none shadow"
 						type="password"
 						bind:value="{new_password1}"
 						required />
@@ -161,10 +159,9 @@
 
 					<input
 						id="new_password2"
-						class="appearance-none block w-full bg-white
-						dark:bg-gray-400 text-gray-900 font-medium border
-						border-gray-400 rounded-lg py-3 px-3 leading-tight
-						focus:outline-none"
+						class="w-full bg-gray-200 dark:bg-gray-400 text-gray-900
+						font-medium border border-gray-400 rounded-lg py-3 px-3
+						leading-tight focus:outline-none shadow"
 						type="password"
 						bind:value="{new_password2}"
 						required />
@@ -176,9 +173,9 @@
 					<button
 						disabled="{!old_password || !new_password1 || !new_password2}"
 						type="submit"
-						class="appearance-none block w-full bg-red-600
-						dark:bg-red-700 text-white font-bold rounded-lg py-3 px-3
-						leading-tight hover:bg-red-500 capitalize">
+						class="w-full bg-red-600 dark:bg-red-700 text-white
+						font-bold rounded-lg py-3 px-3 leading-tight
+						hover:bg-red-500 capitalize shadow-md">
 
 						{#if loading}
 							<div class="flex items-center justify-center">
