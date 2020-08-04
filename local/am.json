@@ -1,0 +1,58 @@
+{
+	"title": {
+		"index": "የኢትዮጵያ መታወቂያ አስተዳዳሪ"
+	},
+	"top_navbar": {
+		"title": "የኢትዮጵያ መታወቂያ አስተዳዳሪ",
+		"sign_in": "ስግን እን"
+	},
+	"sign_in": {
+		"title": "ወደ መለያዎ ይግቡ",
+		"error": "የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል",
+		"close": "ገጠመ",
+		"sign_in": "ስግን እን",
+		"username": "የተጠቃሚ ስም",
+		"password": "የይለፍ ቃል"
+	},
+	"home": {
+		"auth": "ለእርስዎ መተግበሪያዎች አስደናቂ የማረጋገጫ ስርዓት ይጠቀሙ",
+		"auth_sub": "የማረጋገጫ ስርዓት ደጋግሞ መፈጠር አቁም ፡፡ ተጠቃሚዎችዎን ለመለየት የታመነ ስርዓት ይጠቀሙ።",
+		"action": "መተግበሪያዎን ይፍጠሩ",
+		"business": "በሁለት ጠቅታዎች የራስዎን ንግድ ይፍጠሩ",
+		"business_sub": "ሀሳብን ለማቅረብ ብቻ በመስመር ላይ መጠበቅ የለም ፡፡ ከሁለት ጠቅታዎች ጋር የንግድ ባለቤት ይሁኑ ፡፡",
+		"renew": "ቤትዎን ሳይለቁ ማንነትዎን ያድሱ።",
+		"renew_sub": "ጊዜው ያለፈበትን ማንነት ከማንኛውም እና ከማንኛውም ሰዓት ያድሱ ፣ ማንነትዎን ለማሳደስ ብቻ ቀንዎን አያባክኑም።"
+	},
+	"languages": {
+		"en": "እንግሊዝኛ",
+		"ar": "አረብኛ",
+		"am": "አማርኛ"
+	},
+	"profile": {
+		"index": "መገለጫ",
+		"hello": "ሰላም,",
+		"businesses": "ንግዶች",
+		"right_navbar_expire": "የእርስዎ መለያ ጊዜው ያበቃል በ",
+		"right_navbar_renew": "የእድሳት ጥያቄ ይላኩ",
+		"right_navbar_app": "መተግበሪያዎን ይፍጠሩ",
+		"right_navbar_business": "አዲስ ንግድ ይጀምሩ",
+		"change_password_title": "የይለፍ ቃልዎን ይቀይሩ",
+		"old_password": "የድሮ ይለፍ ቃል",
+		"new_password": "አዲስ የይለፍ ቃል",
+		"confirm_new_password": "አዲሱን የይለፍ ቃል አረጋግጥ",
+		"submit": "ያስገቡ",
+		"accepted_list": "ተቀባይነት አግኝቷል",
+		"accepted_awaited": "ተጠባበቅ",
+		"business_name": "የንግድ ስም",
+		"business_description": "የንግድ መግለጫ",
+		"business_city": "ከተማ",
+		"business_sub_city": "ክፍለ ከተማ",
+		"business_type_solo": "የግል ተቋም",
+		"business_type_private": "የግል ኃላፊነቱ የተወሰነ ኩባንያ",
+		"business_type": "የንግድ ዓይነት",
+		"business_owners": "የንግድ ባለቤቶች",
+		"business_owners_users": "ተጠቃሚዎች",
+		"business_owners_selected_user": "የተመረጡ ተጠቃሚዎች"
+	},
+	"direction": "ltr"
+}

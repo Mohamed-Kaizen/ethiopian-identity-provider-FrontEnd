@@ -19,6 +19,7 @@ let currentLocale = null
 
 register("en-US", () => import("../local/en-US.json"))
 register("ar", () => import("../local/ar.json"))
+register("am", () => import("../local/am.json"))
 
 $locale.subscribe((value) => {
 	if (value == null) return

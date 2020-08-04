@@ -83,6 +83,8 @@
 
 				<option value="ar">{$_('languages.ar')}</option>
 
+				<option value="am">{$_('languages.am')}</option>
+
 				<option value="en-US">{$_('languages.en')}</option>
 
 			</select>

@@ -17,6 +17,9 @@
 			if ("ar" === $locale) {
 				lang = "ar"
 			}
+			if ("am" === $locale) {
+				lang = "am"
+			}
 
 			const response = await axios.get(
 				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/business/requested/`,

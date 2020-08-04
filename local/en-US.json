@@ -25,7 +25,8 @@
 	},
 	"languages": {
 		"en": "English",
-		"ar": "Arabic"
+		"ar": "Arabic",
+		"am": "Amharic"
 	},
 	"profile": {
 		"index": "profile",

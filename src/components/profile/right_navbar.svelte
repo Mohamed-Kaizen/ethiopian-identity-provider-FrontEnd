@@ -40,6 +40,9 @@
 			if ("ar" === $locale) {
 				lang = "ar"
 			}
+			if ("am" === $locale) {
+				lang = "am"
+			}
 
 			const response = await axios.get(
 				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/user/`,
@@ -160,6 +163,8 @@
 			<!-- Middel side -->
 
 			<option value="ar">{$_('languages.ar')}</option>
+
+			<option value="am">{$_('languages.am')}</option>
 
 			<option value="en-US">{$_('languages.en')}</option>
 
