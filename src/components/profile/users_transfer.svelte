@@ -5,7 +5,10 @@
 	import {crossfade} from "svelte/transition"
 	import {flip} from "svelte/animate"
 
-	import {_} from "svelte-i18n"
+	import axios from "axios"
+	import {_, locale} from "svelte-i18n"
+
+	import {access_token} from "../../store.js"
 
 	const [send, receive] = crossfade({
 		duration: (d) => Math.sqrt(d * 200),
@@ -24,42 +27,40 @@
 			}
 		},
 	})
-	let users = []
+	let loading = false,
+		users = []
 
 	get_users()
 
-	function get_users() {
-		const data = [
-			{
-				id: 1,
-				username: "mila kunis",
-				picture:
-					"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/0909-mila-kunis-1445035501.jpg",
-			},
-			{
-				id: 2,
-				username: "barbossa",
-				picture:
-					"https://static0.srcdn.com/wordpress/wp-content/uploads/2017/05/Geoffery-Rush-as-Hector-Barbossa-in-Pirates-of-the-Caribbean.jpg?q=50&fit=crop&w=740&h=370",
-			},
-			{
-				id: 3,
-				username: "carla",
-				picture: "https://data.whicdn.com/images/341568668/original.jpg",
-			},
-			{
-				id: 4,
-				username: "bugs bunny",
-				picture:
-					"https://vignette.wikia.nocookie.net/christmasspecials/images/3/3a/Bugs_in_Bah_Humduck.jpg/revision/latest?cb=20181226001516",
-			},
-		]
+	async function get_users() {
+		try {
+			loading = true
+			let config = {
+				headers: {Authorization: `Bearer ${$access_token}`},
+			}
+			let lang = "en"
 
-		data.forEach((user) => {
-			user.is_selected = false
-		})
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
 
-		users = data
+			const response = await axios.get(
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/`,
+				config
+			)
+			const data = response.data
+
+			data.forEach((user) => {
+				user.is_selected = false
+			})
+
+			users = data
+
+			loading = false
+		} catch (e) {
+			console.log(e.response)
+			loading = false
+		}
 	}
 
 	function remove(user) {
@@ -84,14 +85,14 @@
 
 		<div
 			class="w-56 py-2 px-4 flex items-center justify-between bg-gray-300
-			rounded-t-lg capitalize">
+			rounded-t-lg capitalize shadow">
 			<!-- Header -->
 			<span>{$_('profile.business_owners_users')}</span>
 			<span>{users.filter((t) => !t.is_selected).length}</span>
 
 		</div>
 
-		<div class="w-56 h-56 py-2 px-4 border overflow-y-auto">
+		<div class="w-56 h-56 py-2 px-4 shadow overflow-y-auto">
 			<!-- List of users -->
 
 			{#each users.filter((t) => !t.is_selected) as user (user.id)}
@@ -120,14 +121,22 @@
 
 				</div>
 			{:else}
-				<div class="flex flex-col items-center mt-6">
+				{#if loading}
+					<div class="flex flex-col items-center mt-16">
+						<div
+							class="w-12 h-12 border-4 border-blue-600
+							rounded-full loader"></div>
+					</div>
+				{:else}
+					<div class="flex flex-col items-center mt-6">
 
-					<img
-						class="h-3/4 w-3/4"
-						src="mirage-list-is-empty.png/"
-						alt="empty users list" />
+						<img
+							class="h-3/4 w-3/4"
+							src="mirage-list-is-empty.png/"
+							alt="empty users list" />
 
-				</div>
+					</div>
+				{/if}
 			{/each}
 
 		</div>
@@ -139,7 +148,7 @@
 
 		<div
 			class="w-56 py-2 px-4 flex items-center justify-between bg-gray-300
-			rounded-t-lg capitalize">
+			rounded-t-lg shadow capitalize">
 			<!-- Header -->
 			<span>{$_('profile.business_owners_selected_user')}</span>
 
@@ -147,7 +156,7 @@
 
 		</div>
 
-		<div class="w-56 h-56 py-2 px-4 border overflow-y-auto">
+		<div class="w-56 h-56 py-2 px-4 shadow overflow-y-auto">
 			<!-- List of users -->
 
 			{#each users.filter((t) => t.is_selected) as user (user.id)}
@@ -189,3 +198,18 @@
 	</div>
 
 </div>
+
+<style>
+	@keyframes loader-rotate {
+		0% {
+			transform: rotate(0);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	.loader {
+		border-right-color: transparent;
+		animation: loader-rotate 0.7s linear infinite;
+	}
+</style>

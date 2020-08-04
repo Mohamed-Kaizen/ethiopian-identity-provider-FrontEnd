@@ -51,22 +51,21 @@
 			{#each data as {description, city, natural_time, name, type}}
 				<li class="mt-2">
 
-					<a
+					<div
 						class="p-5 flex flex-col justify-between bg-purple-700
-						rounded-lg"
-						href="profile/#">
+						rounded-lg">
 
 						<div
 							class="flex items-center justify-between
 							font-semibold capitalize">
 							<!-- Top section -->
 
-							<span>{name}</span>
+							<span class="truncate w-40">{name}</span>
 
 							<div class="flex items-center">
 
 								<svg
-									class="h-5 w-5 fill-current {$_('direction') === 'ltr' ? 'mr-1' : 'ml-1'}
+									class="h-5 w-5 fill-current {$_('direction') === 'ltr' ? 'mr-1' : 'ml-1 transform rotate-180'}
 									text-gray-600"
 									viewBox="0 0 24 24">
 									<path
@@ -99,7 +98,7 @@
 
 						</div>
 
-					</a>
+					</div>
 
 				</li>
 			{:else}

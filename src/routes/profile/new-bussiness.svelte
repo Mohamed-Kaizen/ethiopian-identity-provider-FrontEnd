@@ -2,9 +2,12 @@
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
 
+	import axios from "axios"
 	import {_} from "svelte-i18n"
 	import {Snackbar, Button} from "svelte-mui/src"
+
 	import Spinner from "../../components/spinner/circle.svelte"
+	import {access_token} from "../../store.js"
 
 	import Users from "../../components/profile/users_transfer.svelte"
 
@@ -12,12 +15,54 @@
 		business_city,
 		business_sub_city,
 		business_type,
-		business_description = "",
+		business_description,
 		selected_users,
 		message,
 		message_color,
 		loading = false,
 		visible = false
+
+	async function create() {
+		try {
+			const owners = []
+			if ("Sole Proprietorship" !== business_type) {
+				for (const user of selected_users) {
+					owners.push(user.username)
+				}
+			}
+			const data = {
+				name: business_name,
+				description: business_description,
+				city: business_city,
+				sub_city: business_sub_city,
+				type: business_type,
+				owners: owners,
+			}
+
+			loading = true
+
+			let config = {
+				headers: {Authorization: `Bearer ${$access_token}`},
+			}
+
+			const response = await axios.post(
+				"https://ethiopia-identity-provider.herokuapp.com/api/users/business/",
+				data,
+				config
+			)
+
+			message = "Bussiness request has been created"
+			message_color = "green"
+			visible = true
+			loading = false
+			goto("profile/")
+		} catch (e) {
+			message = "Bussiness with this name already exists"
+			message_color = "#f44336"
+			visible = true
+			loading = false
+		}
+	}
 </script>
 
 <Snackbar
@@ -169,7 +214,8 @@
 				<div class="w-full px-3 mb-6">
 
 					<button
-						disabled="{!business_name || !business_city || !business_sub_city || !business_type || !business_description}"
+						on:click="{create}"
+						disabled="{!business_name || !business_city || !business_sub_city || !business_type || !business_description || loading}"
 						type="submit"
 						class="appearance-none block w-full bg-red-600
 						dark:bg-red-700 text-white font-bold rounded-lg py-3 px-3
