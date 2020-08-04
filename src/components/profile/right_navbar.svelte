@@ -1,8 +1,6 @@
 <script>
 	import {fly} from "svelte/transition"
 	import axios from "axios"
-	import moment from "moment"
-	import locales from "moment/min/locales.min"
 	import {goto} from "@sapper/app"
 	import {_, locale} from "svelte-i18n"
 
@@ -12,7 +10,7 @@
 
 	let expired_date,
 		expired_date_readable,
-		is_vaild,
+		has_expired,
 		message,
 		message_color,
 		loading = false,
@@ -37,26 +35,29 @@
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
+			let lang = "en"
+
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
 
 			const response = await axios.get(
-				"https://ethiopia-identity-provider.herokuapp.com/api/users/user/",
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/user/`,
 				config
 			)
-			moment.locale($locale)
-			expired_date_readable = moment(
-				response.data.expired_at,
-				"YYYYMMDD"
-			).fromNow()
 
-			expired_date = moment(response.data.expired_at).format(
-				"MMMM Do YYYY"
-			)
+			expired_date_readable = response.data.expired_natural_time
 
-			is_vaild = moment(response.data.expired_at).isAfter(new Date())
+			expired_date = response.data.expired_natural_day
+
+			has_expired = response.data.has_expired
 		} catch (e) {
 			access_token.set(false)
+
 			refresh_token.set(false)
+
 			user.set(false)
+
 			goto("signin/")
 		}
 	}
@@ -176,15 +177,7 @@
 
 	</div>
 
-	{#if is_vaild}
-		<span class="mt-8 text-gray-600 dark:text-gray-500">
-			{$_('profile.right_navbar_expire')}
-		</span>
-
-		<span class="mt-1 text-3xl font-semibold">
-			{expired_date} {expired_date_readable}
-		</span>
-	{:else}
+	{#if has_expired}
 		<button
 			on:click="{renew}"
 			class="mt-20 py-4 px-3 text-white text-center rounded-lg bg-red-400
@@ -198,6 +191,14 @@
 			{:else}{$_('profile.right_navbar_renew')}{/if}
 
 		</button>
+	{:else}
+		<span class="mt-8 text-gray-600 dark:text-gray-500">
+			{$_('profile.right_navbar_expire')}
+		</span>
+
+		<span class="mt-1 text-3xl font-semibold">
+			{expired_date} {expired_date_readable}
+		</span>
 	{/if}
 
 	<a

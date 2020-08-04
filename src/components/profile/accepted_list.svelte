@@ -1,8 +1,7 @@
 <script>
 	import {fly} from "svelte/transition"
 	import axios from "axios"
-	import moment from "moment"
-	import {_} from "svelte-i18n"
+	import {_, locale} from "svelte-i18n"
 
 	import {access_token} from "../../store.js"
 
@@ -13,11 +12,17 @@
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
+			let lang = "en"
+
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
 
 			const response = await axios.get(
-				"https://ethiopia-identity-provider.herokuapp.com/api/users/business/accepted/",
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/business/accepted/`,
 				config
 			)
+
 			data = response.data
 		} catch (e) {
 			console.log(e.response.data)
@@ -46,7 +51,7 @@
 		<!-- List -->
 
 		<ul class="pt-1 pb-2 px-3">
-			{#each data as {description, city, create_at, name, type}}
+			{#each data as {description, city, natural_time, name, type}}
 				<li class="mt-2">
 
 					<a
@@ -96,7 +101,7 @@
 							<p
 								class="text-sm font-medium leading-snug
 								text-gray-600">
-								{moment(create_at, 'YYYYMMDD').fromNow()}
+								{natural_time}
 							</p>
 
 						</div>
