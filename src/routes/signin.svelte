@@ -2,6 +2,7 @@
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
 	import {_} from "svelte-i18n"
+	import axios from "axios"
 
 	import {Textfield, Snackbar, Button} from "svelte-mui/src"
 	import custom_axios from "../axios.js"
@@ -21,10 +22,29 @@
 		loading = true
 		const data = {username: username, password: password}
 		try {
-			const response = await custom_axios.post("users/login/", data)
+			const response = await axios.post("/login/", data)
+
 			access_token.set(response.data.access_token)
+
 			refresh_token.set(response.data.refresh_token)
-			user.set(response.data.user)
+
+			let config = {
+				headers: {Authorization: `Bearer ${$access_token}`},
+			}
+
+			const user_response = await custom_axios.get(
+				"users/o/userinfo/",
+				config
+			)
+
+			user.set({
+				email: user_response.data.email,
+				expired_natural_day: user_response.data.expired_natural_day,
+				expired_natural_time: user_response.data.expired_natural_time,
+				has_expired: user_response.data.has_expired,
+				picture: user_response.data.picture,
+				username: user_response.data.username,
+			})
 			loading = false
 			goto("profile/")
 		} catch (e) {
