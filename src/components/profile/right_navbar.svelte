@@ -15,7 +15,11 @@
 		message_color,
 		loading = false,
 		visible = false
+	expired_date_readable = $user.expired_natural_time
 
+	expired_date = $user.expired_natural_day
+
+	has_expired = $user.has_expired
 	function mode_swticher() {
 		if ($light_mode) {
 			document.documentElement.classList.add("mode-dark")
@@ -45,7 +49,7 @@
 			}
 
 			const response = await axios.get(
-				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/user/`,
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/o/userinfo/`,
 				config
 			)
 
@@ -72,9 +76,17 @@
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
+			let lang = "en"
+
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
+			if ("am" === $locale) {
+				lang = "am"
+			}
 
 			const response = await axios.post(
-				"https://ethiopia-identity-provider.herokuapp.com/api/users/renew/",
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/o/renew/`,
 				{},
 				config
 			)

@@ -3,7 +3,7 @@
 	import {goto} from "@sapper/app"
 
 	import axios from "axios"
-	import {_} from "svelte-i18n"
+	import {_, locale} from "svelte-i18n"
 	import {Snackbar, Button} from "svelte-mui/src"
 
 	import Spinner from "../../components/spinner/circle.svelte"
@@ -44,9 +44,17 @@
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
+			let lang = "en"
+
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
+			if ("am" === $locale) {
+				lang = "am"
+			}
 
 			const response = await axios.post(
-				"https://ethiopia-identity-provider.herokuapp.com/api/users/business/",
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/o/business/`,
 				data,
 				config
 			)

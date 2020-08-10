@@ -1,7 +1,7 @@
 <script>
 	import {fly} from "svelte/transition"
 	import {goto} from "@sapper/app"
-	import {_} from "svelte-i18n"
+	import {_, locale} from "svelte-i18n"
 
 	import {Snackbar, Button} from "svelte-mui/src"
 	import axios from "axios"
@@ -27,9 +27,16 @@
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
-			console.log($access_token)
+			let lang = "en"
+
+			if ("ar" === $locale) {
+				lang = "ar"
+			}
+			if ("am" === $locale) {
+				lang = "am"
+			}
 			const response = await axios.post(
-				"https://ethiopia-identity-provider.herokuapp.com/api/users/password/change/",
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/password/change/`,
 				data,
 				config
 			)

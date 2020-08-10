@@ -22,7 +22,7 @@
 			}
 
 			const response = await axios.get(
-				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/business/requested/`,
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/o/business/requested/`,
 				config
 			)
 

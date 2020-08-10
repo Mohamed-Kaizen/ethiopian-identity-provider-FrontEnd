@@ -11,7 +11,7 @@
 	import {goto} from "@sapper/app"
 	import {_} from "svelte-i18n"
 
-	import {access_token, refresh_token, user, light_mode} from "../../store"
+	import {access_token, refresh_token} from "../../store"
 	import LeftSideNavBar from "../../components/profile/left_side_navbar.svelte"
 	import RightNavBar from "../../components/profile/right_navbar.svelte"
 

@@ -22,14 +22,12 @@
 			}
 
 			const response = await axios.get(
-				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/business/accepted/`,
+				`https://ethiopia-identity-provider.herokuapp.com/${lang}/api/users/o/business/accepted/`,
 				config
 			)
 
 			data = response.data
-		} catch (e) {
-			console.log(e.response.data)
-		}
+		} catch (e) {}
 	}
 	get_data()
 </script>
