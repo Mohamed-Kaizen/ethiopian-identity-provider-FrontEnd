@@ -37,4 +37,16 @@
 
 	</button>
 
+	<button
+		on:click="{() => {
+			locale.set('am')
+		}}"
+		class="flex flex-col flex-grow items-center justify-center
+		overflow-hidden whitespace-no-wrap text-sm transition-colors duration-100
+		ease-in-out {$locale === 'am' ? 'bg-gray-200 dark:bg-gray-600 text-red-600 dark:text-red-300' : ''}">
+
+		<span class="text-sm capitalize">{$_('languages.am')}</span>
+
+	</button>
+
 </nav>

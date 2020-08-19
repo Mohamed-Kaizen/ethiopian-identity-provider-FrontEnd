@@ -103,8 +103,8 @@
 					in:receive="{{key: user.id}}"
 					out:send="{{key: user.id}}"
 					animate:flip
-					class="my-4 flex items-center justify-between bg-white
-					capitalize text-sm rounded-lg">
+					class="my-4 flex items-center justify-between capitalize
+					text-sm rounded-lg">
 					<!-- Card -->
 
 					<div class="flex items-center">
@@ -167,8 +167,8 @@
 					in:receive="{{key: user.id}}"
 					out:send="{{key: user.id}}"
 					animate:flip
-					class="my-4 flex items-center justify-between bg-white
-					capitalize text-sm rounded-lg">
+					class="my-4 flex items-center justify-between capitalize
+					text-sm rounded-lg">
 					<!-- Card -->
 					<div class="flex items-center">
 

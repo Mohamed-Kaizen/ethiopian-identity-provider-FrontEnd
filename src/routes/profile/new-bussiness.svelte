@@ -103,7 +103,7 @@
 	<div class="flex justify-center my-2 mx-4 md:mx-0">
 
 		<form
-			on:submit|preventDefault="{() => {}}"
+			on:submit|preventDefault="{create}"
 			class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg
 			shadow-md p-6">
 
@@ -222,7 +222,6 @@
 				<div class="w-full px-3 mb-6">
 
 					<button
-						on:click="{create}"
 						disabled="{!business_name || !business_city || !business_sub_city || !business_type || !business_description || loading}"
 						type="submit"
 						class="appearance-none block w-full bg-red-600

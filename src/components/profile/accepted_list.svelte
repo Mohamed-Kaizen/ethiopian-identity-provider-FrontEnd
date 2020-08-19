@@ -5,10 +5,12 @@
 
 	import {access_token} from "../../store.js"
 
-	let data = []
+	let data = [],
+		loading = false
 
 	async function get_data() {
 		try {
+			loading = true
 			let config = {
 				headers: {Authorization: `Bearer ${$access_token}`},
 			}
@@ -27,7 +29,10 @@
 			)
 
 			data = response.data
-		} catch (e) {}
+			loading = false
+		} catch (e) {
+			loading = false
+		}
 	}
 	get_data()
 </script>
@@ -110,17 +115,40 @@
 
 				</li>
 			{:else}
-				<div class="flex flex-col items-center mt-12">
+				{#if loading}
+					<div class="flex flex-col items-center mt-32">
+						<div
+							class="w-12 h-12 border-4 border-blue-600
+							rounded-full loader"></div>
+					</div>
+				{:else}
+					<div class="flex flex-col items-center mt-12">
 
-					<img
-						class="h-3/4 w-3/4"
-						src="mirage-list-is-empty.png/"
-						alt="empty accepted list" />
+						<img
+							class="h-3/4 w-3/4"
+							src="mirage-list-is-empty.png/"
+							alt="empty accepted list" />
 
-				</div>
+					</div>
+				{/if}
 			{/each}
 		</ul>
 
 	</div>
 
 </div>
+
+<style>
+	@keyframes loader-rotate {
+		0% {
+			transform: rotate(0);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	.loader {
+		border-right-color: transparent;
+		animation: loader-rotate 1s linear infinite;
+	}
+</style>
